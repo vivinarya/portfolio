@@ -23,7 +23,7 @@ export default function Home() {
         <div className="bg-background">
           <TextRevealByWord text="I craft high-performance digital experiences that merge systems engineering with intelligent AI workflows." />
         </div>
-        <div className="max-w-7xl mx-auto py-40 px-8">
+        <div className="max-w-7xl mx-auto py-24 md:py-40 px-8">
           <h2 className="text-foreground text-xl font-bold mb-20 underline uppercase tracking-[0.3em]">
             01 / What I Do
           </h2>
@@ -45,7 +45,7 @@ export default function Home() {
       </section>
 
       {/* Selected Works Section */}
-      <section id="works" className="w-full py-40 bg-background px-8 overflow-hidden border-t border-border transition-colors duration-500">
+      <section id="works" className="w-full py-24 md:py-40 bg-background px-8 overflow-hidden border-t border-border transition-colors duration-500">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-foreground text-xl font-bold mb-20 underline uppercase tracking-[0.3em] text-right">
             02 / Selected Works
@@ -78,7 +78,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="w-full py-40 px-8 border-t border-border bg-background transition-colors duration-500">
+      <footer id="contact" className="w-full py-24 md:py-40 px-8 border-t border-border bg-background transition-colors duration-500">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col gap-20">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-muted-foreground uppercase">Get in touch.</h2>

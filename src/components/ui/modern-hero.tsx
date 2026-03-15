@@ -18,14 +18,14 @@ import { useRouter } from "next/navigation";
 export const SmoothScrollHero = () => {
   return (
     <div className="bg-background">
-      <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+      <ReactLenis root options={{ lerp: 0.2, duration: 1.2, smoothWheel: true }}>
         <HeroSection />
       </ReactLenis>
     </div>
   );
 };
 
-const SECTION_HEIGHT = 1500;
+const SECTION_HEIGHT = 800;
 
 const HeroSection = () => {
   const { scrollY } = useScroll();
@@ -38,7 +38,7 @@ const HeroSection = () => {
     >
       <motion.div 
         style={{ opacity: indicatorOpacity }}
-        className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-4 pointer-events-none"
+        className="fixed bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 md:gap-4 pointer-events-none"
       >
         <motion.span 
           animate={{ opacity: [0.4, 1, 0.4] }}
@@ -47,7 +47,7 @@ const HeroSection = () => {
         >
           Scroll to explore
         </motion.span>
-        <div className="h-24 w-[3px] bg-foreground/10 relative overflow-hidden rounded-full">
+        <div className="h-12 md:h-24 w-[2px] md:w-[3px] bg-foreground/10 relative overflow-hidden rounded-full">
           <motion.div 
             animate={{ y: ["-100%", "100%"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -67,8 +67,8 @@ const StickyBackground = () => {
   const router = useRouter();
 
   // Morphing clip path - Extra wide initial values to prevent side-clipping of "B" and "S"
-  const clip1 = useTransform(scrollY, [0, 800], [2, 0]);
-  const clip2 = useTransform(scrollY, [0, 800], [98, 100]);
+  const clip1 = useTransform(scrollY, [0, 800], [0, 0]); // Stabilize clip on mobile
+  const clip2 = useTransform(scrollY, [0, 800], [100, 100]);
   const clipPath = useMotionTemplate`polygon(${clip1}% ${clip1}%, ${clip2}% ${clip1}%, ${clip2}% ${clip2}%, ${clip1}% ${clip2}%)`;
 
   const backgroundScale = useTransform(
@@ -113,7 +113,7 @@ const StickyBackground = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 1 }}
-          className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/50 mt-16 max-w-lg mx-auto leading-relaxed"
+          className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/50 mt-8 md:mt-16 max-w-lg mx-auto leading-relaxed"
         >
           "He is terribly afraid of dying because he hasn’t yet lived." — Franz Kafka
         </motion.p>
