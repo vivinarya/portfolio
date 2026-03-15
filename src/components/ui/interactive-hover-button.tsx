@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface InteractiveHoverButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> { }
 
 export const InteractiveHoverButton = React.forwardRef<
   HTMLButtonElement,
@@ -19,7 +19,10 @@ export const InteractiveHoverButton = React.forwardRef<
       {...props}
     >
       <div className="flex items-center gap-2">
-        <div className="h-2 w-2 rounded-full bg-primary transition-all duration-300 group-hover:scale-[100.8]"></div>
+        <div className="relative h-2 w-2 flex items-center justify-center">
+          <div className="absolute h-8 w-8 rounded-full bg-primary scale-0 transition-all duration-500 group-hover:scale-[30] [backface-visibility:hidden]"></div>
+          <div className="h-2 w-2 rounded-full bg-primary transition-all duration-300 group-hover:opacity-0"></div>
+        </div>
         <span className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
           {children}
         </span>

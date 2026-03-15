@@ -23,19 +23,30 @@ export const metadata: Metadata = {
   description: "I build fast, modern systems and AI workflows.",
 };
 
+import { ThemeProvider } from "@/components/theme-provider";
+import { ScrollReset } from "@/components/scroll-reset";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("dark", "font-mono", jetbrainsMono.variable)}>
+    <html lang="en" className={cn("font-mono", jetbrainsMono.variable)} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-white selection:text-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-primary selection:text-primary-foreground`}
       >
-        <InvertedCursor />
-        <Navbar />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ScrollReset />
+          <InvertedCursor />
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

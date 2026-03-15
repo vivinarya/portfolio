@@ -8,11 +8,22 @@ export const InvertedCursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 20, stiffness: 300 };
+  const springConfig = { damping: 25, stiffness: 400 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
+    // Hide cursor on touch devices
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouchDevice) {
+      setIsVisible(false);
+      return;
+    }
+
+    setIsVisible(true);
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -20,19 +31,18 @@ export const InvertedCursor = () => {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (
+      if (!target) return;
+      
+      const isClickable = 
         window.getComputedStyle(target).cursor === "pointer" ||
-        target.tagName.toLowerCase() === "button" ||
-        target.tagName.toLowerCase() === "a"
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+        target.closest("button") ||
+        target.closest("a");
+
+      setIsHovering(!!isClickable);
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
@@ -40,21 +50,25 @@ export const InvertedCursor = () => {
     };
   }, [cursorX, cursorY]);
 
+  if (!isVisible) return null;
+
   return (
     <motion.div
       style={{
-        translateX: cursorXSpring,
-        translateY: cursorYSpring,
+        x: cursorXSpring,
+        y: cursorYSpring,
+        translateX: "-50%",
+        translateY: "-50%",
       }}
-      className="pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-difference bg-white"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] h-8 w-8 rounded-full mix-blend-difference bg-white [backface-visibility:hidden] border border-transparent"
       animate={{
         scale: isHovering ? 2.5 : 1,
       }}
       transition={{
         type: "spring",
-        damping: 20,
-        stiffness: 300,
+        damping: 25,
+        stiffness: 400,
       }}
     />
   );
-};
+}
