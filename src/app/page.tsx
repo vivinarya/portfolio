@@ -85,9 +85,9 @@ export default function Home() {
             
             <div className="flex flex-col gap-8">
               {[
-                { name: "GITHUB", href: "https://github.com/vivin" },
+                { name: "GITHUB", href: "https://github.com/vivinarya" },
                 { name: "LINKEDIN", href: "https://www.linkedin.com/in/vivin-arya" },
-                { name: "EMAIL", href: "mailto:vivinarya2@gmail.com" }
+                { name: "vivinarya2@gmail.com", href: "mailto:vivinarya2@gmail.com" }
               ].map((link, i) => (
                 <motion.a
                   key={link.name}
