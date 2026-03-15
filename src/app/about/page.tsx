@@ -72,8 +72,8 @@ export default function AboutPage() {
               alt="Vivin with guitar"
               fill
               priority
-              style={{ objectPosition: 'center', objectFit: 'cover' }}
-              className="transition-transform duration-700 group-hover:scale-105"
+              style={{ objectPosition: '15% 15%', objectFit: 'cover' }}
+              className="scale-[1.5] transition-transform duration-700 group-hover:scale-[1.6]"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
@@ -142,11 +142,6 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-            <motion.div className="mt-4" whileTap={{ scale: 0.95 }}>
-              <InteractiveHoverButton onClick={() => window.open('https://github.com/vivin', '_blank')} className="w-full md:w-auto">
-                Download My CV
-              </InteractiveHoverButton>
-            </motion.div>
           </motion.div>
         </section>
 
